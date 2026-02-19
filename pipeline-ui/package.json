@@ -1,4 +1,7 @@
 {
+  "overrides": {
+    "minimatch": "^3.0.5"
+  },
   "name": "pipeline-ui",
   "private": true,
   "version": "0.0.0",
