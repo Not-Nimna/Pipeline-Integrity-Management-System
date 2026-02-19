@@ -25,8 +25,15 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
-
 var app = builder.Build();
+
+// Seed sample data (runs once; safe to leave in dev)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await SeedData.InitializeAsync(db);
+}
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -34,45 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();
-
 app.UseCors("Frontend");
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();
-
-
-
-
-// Optional: keep your test endpoint for now
-// app.MapGet("/weatherforecast", () =>
-// {
-//     var summaries = new[]
-//     {
-//         "Freezing","Bracing","Chilly","Cool","Mild","Warm","Balmy","Hot","Sweltering","Scorching"
-//     };
-
-//     var forecast = Enumerable.Range(1, 5).Select(index =>
-//         new WeatherForecast(
-//             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//             Random.Shared.Next(-20, 55),
-//             summaries[Random.Shared.Next(summaries.Length)]
-//         )).ToArray();
-
-//     return forecast;
-// })
-// .WithName("GetWeatherForecast");
-
-
-// record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-// {
-//     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-// }
-
-
-
-
-
-
-

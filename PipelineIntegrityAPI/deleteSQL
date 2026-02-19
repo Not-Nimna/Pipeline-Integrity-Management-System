@@ -1,0 +1,8 @@
+USE PipelineIntegrity;
+GO
+
+DELETE FROM RiskScores;
+DELETE FROM Inspections;
+DELETE FROM Segments;
+DELETE FROM Pipelines;
+GO
