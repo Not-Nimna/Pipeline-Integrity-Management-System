@@ -12,7 +12,7 @@ using PipelineIntegrityAPI.Data;
 namespace PipelineIntegrityAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260219073626_InitialCreate")]
+    [Migration("20260219084551_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
